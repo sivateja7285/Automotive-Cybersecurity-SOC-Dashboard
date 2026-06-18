@@ -75,7 +75,7 @@ if not attacks.empty:
 # Title
 # -------------------------------
 
-st.title("🚗 Automotive Cybersecurity SOC Dashboard")
+st.title("Automotive Cybersecurity SOC Dashboard")
 
 # -------------------------------
 # Critical Alert Panel
