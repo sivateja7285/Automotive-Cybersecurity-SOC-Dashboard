@@ -1,6 +1,6 @@
 import pandas as pd
 
-df = pd.read_csv("vehicle_data.csv")
+df = pd.read_csv("data/vehicle_data.csv")
 
 attacks = []
 
@@ -30,6 +30,6 @@ for index, row in df.iterrows():
 
 attack_df = pd.DataFrame(attacks)
 
-attack_df.to_csv("attack_log.csv", index=False)
+attack_df.to_csv("data/attack_log.csv", index=False)
 
 print(f"Total attacks detected: {len(attacks)}")

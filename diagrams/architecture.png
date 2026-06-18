@@ -1,0 +1,30 @@
+Vehicle ECUs
+      │
+      ▼
+CAN Bus Traffic Simulation
+      │
+      ▼
+Realtime Simulator
+      │
+      ▼
+Vehicle Data Logs
+      │
+      ▼
+Attack Detector
+      │
+      ├── Speed Spoofing
+      ├── RPM Manipulation
+      ├── Replay Attack
+      └── DoS Flooding
+      │
+      ▼
+Detected Attacks
+      │
+      ▼
+Streamlit SOC Dashboard
+      │
+      ├── KPI Cards
+      ├── Critical Alerts
+      ├── ECU Analytics
+      ├── Replay Detection
+      └── DoS Monitoring

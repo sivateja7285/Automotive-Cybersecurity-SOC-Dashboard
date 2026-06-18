@@ -24,7 +24,7 @@ attack_types = [
 
 # Create CSV if it doesn't exist
 
-if not os.path.exists("vehicle_data.csv"):
+if not os.path.exists("data/vehicle_data.csv"):
     df = pd.DataFrame(columns=[
         "Timestamp",
         "CAN_ID",
@@ -33,7 +33,7 @@ if not os.path.exists("vehicle_data.csv"):
         "Temperature",
         "Attack_Type"
     ])
-    df.to_csv("vehicle_data.csv", index=False)
+    df.to_csv("data/vehicle_data.csv", index=False)
 
 
 print("🚗 Real-time simulator started...")
@@ -46,11 +46,17 @@ while True:
 
     attack_type = "Normal"
 
-    attack = random.random() < 0.50
+    attack = random.random() < 0.40
 
     if attack:
 
-        attack_type = random.choice(attack_types)
+        attack_type = random.choices(
+            attack_types,
+            weights=[40, 35, 20, 5],
+            k=1
+        )[0]
+
+        
 
         # Speed Spoofing
         if attack_type == "Speed Spoofing":
@@ -87,7 +93,7 @@ while True:
                 )
 
                 replay_row.to_csv(
-                    "vehicle_data.csv",
+                    "data/vehicle_data.csv",
                     mode="a",
                     header=False,
                     index=False
@@ -106,7 +112,7 @@ while True:
 
             print(f"🚨 DoS Attack Started from {flood_ecu}")
 
-            for _ in range(100):
+            for _ in range(25):
 
                 dos_row_data = [
                     datetime.now(),
@@ -132,7 +138,7 @@ while True:
                 )
 
                 dos_row.to_csv(
-                    "vehicle_data.csv",
+                    "data/vehicle_data.csv",
                     mode="a",
                     header=False,
                     index=False
@@ -168,7 +174,7 @@ while True:
     )
 
     row.to_csv(
-        "vehicle_data.csv",
+        "data/vehicle_data.csv",
         mode="a",
         header=False,
         index=False

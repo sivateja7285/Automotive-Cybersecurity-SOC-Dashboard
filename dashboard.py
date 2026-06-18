@@ -23,7 +23,7 @@ st_autorefresh(
 # Load Data
 # -------------------------------
 
-vehicle = pd.read_csv("vehicle_data.csv")
+vehicle = pd.read_csv("data/vehicle_data.csv")
 
 # Show latest 500 messages only
 
@@ -35,9 +35,11 @@ vehicle = vehicle.tail(500)
 ecu_counts_full = vehicle["CAN_ID"].value_counts()
 
 dos_ecus = ecu_counts_full[
-    ecu_counts_full > 100
+    ecu_counts_full > 20
 ]
-
+dos_attacks = vehicle[
+    vehicle["Attack_Type"] == "DoS Attack"
+]
 
 
 # Live attack detection
@@ -97,20 +99,29 @@ if not critical_alerts.empty:
 st.divider()
 st.subheader("🚨 DoS Attack Detection")
 
-if len(dos_ecus) > 0:
+if not dos_attacks.empty:
 
-    for ecu, count in dos_ecus.items():
+    st.error(
+        f"🚨 DoS Attack Events Detected: {len(dos_attacks)}"
+    )
 
-        st.error(
-            f"🚨 DoS Attack Detected | ECU: {ecu} | Messages: {count}"
-        )
+    st.dataframe(
+        dos_attacks[
+            [
+                "Timestamp",
+                "CAN_ID",
+                "Speed",
+                "RPM",
+                "Temperature"
+            ]
+        ].tail(10)
+    )
 
 else:
 
     st.success(
         "No DoS Attack Detected"
     )
-
 
 # -------------------------------
 # Metrics
