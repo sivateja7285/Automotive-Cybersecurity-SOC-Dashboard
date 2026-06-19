@@ -21,6 +21,7 @@ Modern vehicles contain multiple Electronic Control Units (ECUs) communicating o
 - DoS Attack Detection
 - Threat Severity Classification
 - Security Metrics Dashboard
+- MITRE ATT&CK threat mapping  
 - ECU Activity Monitoring
 - Critical Alert Generation
 
@@ -105,13 +106,13 @@ python -m streamlit run dashboard.py
 
 ![Telemetry_and_detected_threats](screenshots\Telemetry_and_detected_threats.png)
 
-### vehicle_speed_analysis
+### vehicle speed analysis
 
 ![vehicle_speed_analysis](screenshots\vehicle_speed_analysis.png)
 
-### Attacks_&_ECU_traffic_distribution
+### Attacks & ECU traffic distribution
 
-![Attacks_&_ECU_traffic_distribution](Attack_&_ECU_traffic_distribution.png)
+![Attacks_&_ECU_traffic_distribution](screenshots\Attack_&_ECU_traffic_distribution.png)
 ---
 
 
