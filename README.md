@@ -102,17 +102,17 @@ python -m streamlit run dashboard.py
 
 ### Attack Detection
 
-![Replay_attack_Detection](screenshots\Replay_attack_detection.png)
+![Replay attack Detection](screenshots\Replay_attack_detection.png)
 
-![Telemetry_and_detected_threats](screenshots\Telemetry_and_detected_threats.png)
+![Telemetry and detected threats](screenshots\Telemetry_and_detected_threats.png)
 
 ### vehicle speed analysis
 
-![vehicle_speed_analysis](screenshots\vehicle_speed_analysis.png)
+![vehicle speed analysis](screenshots\vehicle_speed_analysis.png)
 
 ### Attacks & ECU traffic distribution
 
-![Attacks_&_ECU_traffic_distribution](screenshots\Attack_&_ECU_traffic_distribution.png)
+![Attacks & ECU traffic distribution](screenshots\Attack_&_ECU_traffic_distribution.png)
 ---
 
 
