@@ -28,6 +28,8 @@ vehicle = pd.read_csv("data/vehicle_data.csv")
 # Show latest 500 messages only
 
 vehicle = vehicle.tail(500)
+
+
 # -------------------------------
 # DoS Detection
 # -------------------------------
@@ -69,6 +71,77 @@ if not attacks.empty:
     attacks["Severity"] = attacks.apply(
         get_severity,
         axis=1
+    )
+
+
+# -------------------------------
+# MITRE ATT&CK Mapping
+# -------------------------------
+
+attack_mapping = {
+    "Replay Attack": {
+        "Technique": "Replay of CAN Messages",
+        "Severity": "High"
+    },
+
+    "DoS Attack": {
+        "Technique": "Denial of Service",
+        "Severity": "Critical"
+    },
+
+    "Speed Spoofing": {
+        "Technique": "Message Injection",
+        "Severity": "High"
+    },
+
+    "RPM Manipulation": {
+        "Technique": "Sensor Data Manipulation",
+        "Severity": "High"
+    }
+}
+# -------------------------------
+# Threat Intelligence
+# -------------------------------
+
+threat_intel = []
+
+for _, row in vehicle.iterrows():
+
+    attack_type = str(
+        row["Attack_Type"]
+    ).strip()
+
+    if attack_type in attack_mapping:
+
+        threat_intel.append({
+            "Timestamp": row["Timestamp"],
+            "Attack": attack_type,
+            "Technique": attack_mapping[attack_type]["Technique"],
+            "Severity": attack_mapping[attack_type]["Severity"]
+        })
+
+threat_df = pd.DataFrame(threat_intel)
+
+# -------------------------------
+# Threat Technique Distribution
+# -------------------------------
+
+st.divider()
+st.subheader("🎯 Threat Technique Distribution")
+
+if not threat_df.empty:
+
+    technique_counts = (
+        threat_df["Technique"]
+        .value_counts()
+    )
+
+    st.bar_chart(technique_counts)
+
+else:
+
+    st.success(
+        "No threat techniques detected."
     )
 
 # -------------------------------
@@ -201,6 +274,23 @@ st.divider()
 st.subheader("🚨 Detected Threats")
 
 st.dataframe(attacks)
+
+# -------------------------------
+# MITRE ATT&CK Threat Mapping
+# -------------------------------
+
+st.divider()
+st.subheader("🛡️ MITRE ATT&CK Threat Mapping")
+
+if not threat_df.empty:
+
+    st.dataframe(threat_df)
+
+else:
+
+    st.success(
+        "No mapped threats detected."
+    )
 
 # -------------------------------
 # Speed Analysis Graph
